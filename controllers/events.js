@@ -31,8 +31,10 @@ function store(req, res) {
 };
 
 function update(req, res) {
-
-
+    const eventId = parseInt(req.params.id);
+    const updatedEventData = req.body;
+    const updatedEvent = Event.updateEvent(eventId, updatedEventData);
+    res.json({ message: 'Evento aggiornato con successo', event: updatedEvent });
 };
 
 function show(req, res) {

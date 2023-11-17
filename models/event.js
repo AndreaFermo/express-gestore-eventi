@@ -33,7 +33,7 @@ class Event {
             const events = JSON.parse(fileContent);
             return events;
         } catch (error) {
-            console.log(("Errore durante l'apertura del database", error))
+            console.log(("Errore durante l'apertura del database"))
             return [];
         }
     }
@@ -52,6 +52,25 @@ class Event {
         } catch (error) {
             console.log(("Errore durante il salvataggio dell\'evento:", error))
             return false;
+        }
+    }
+
+    static updateEvent(id, updatedEventData) {
+        const filePath = path.resolve(__dirname, "..", "db", "events.json");
+        const events = Event.getAllEvents();
+        const eventIndex = events.findIndex((event) => event.id === id);
+
+        if (eventIndex === -1) {
+            throw new Error('Evento non trovato');
+        }
+
+        events[eventIndex] = { ...events[eventIndex], ...updatedEventData };
+
+        try {
+            fs.writeFileSync(filePath, JSON.stringify(events, null, 2));
+            return events[eventIndex];
+        } catch (error) {
+            throw new Error("Errore durante l'aggiornamento dell'evento");
         }
     }
 };
