@@ -33,19 +33,5 @@
     "description": "Esplora le applicazioni e le sfide della tecnologia blockchain.",
     "date": "2023-12-05",
     "maxSeats": 5
-  },
-  {
-    "id": 6,
-    "title": "corso di pasticceria",
-    "description": "scopri come fare una torta",
-    "date": "2023-11-25",
-    "maxSeats": "50"
-  },
-  {
-    "id": 7,
-    "title": "corso di pasticceria",
-    "description": "scopri come fare una torta",
-    "date": "2023-11-25",
-    "maxSeats": 50
   }
 ]
