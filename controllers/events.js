@@ -18,6 +18,12 @@ function index(req, res) {
 function store(req, res) {
     const { title, description, date, maxSeats } = req.body;
 
+
+    if (!parseInt(maxSeats)) {
+        throw new Error("Il valore di maxSeats noon deve contenere caratteri che non siano numeri");
+    }
+
+
     const newEvent = new Event(title, description, date, parseInt(maxSeats));
 
     const success = Event.saveEvent(newEvent);
@@ -31,6 +37,10 @@ function store(req, res) {
 };
 
 function update(req, res) {
+    const maxSeatsIsParsable = parseInt(req.body.maxSeats);
+    if (!maxSeatsIsParsable) {
+        throw new Error("Il valore di maxSeats noon deve contenere caratteri che non siano numeri");
+    }
     const eventId = parseInt(req.params.id);
     const updatedEventData = req.body;
     const updatedEvent = Event.updateEvent(eventId, updatedEventData);
