@@ -66,6 +66,7 @@ class Event {
 
         events[eventIndex] = { ...events[eventIndex], ...updatedEventData };
         console.log(typeof events[eventIndex].maxSeats)
+
         if (typeof events[eventIndex].maxSeats != "int") {
             events[eventIndex].maxSeats = parseInt(events[eventIndex].maxSeats);
         }
