@@ -20,7 +20,7 @@ function store(req, res) {
 
 
     if (!parseInt(maxSeats)) {
-        throw new Error("Il valore di maxSeats noon deve contenere caratteri che non siano numeri");
+        throw new Error("Il valore di maxSeats non deve contenere caratteri che non siano numeri");
     }
 
 
@@ -37,8 +37,7 @@ function store(req, res) {
 };
 
 function update(req, res) {
-    const maxSeatsIsParsable = parseInt(req.body.maxSeats);
-    if (!maxSeatsIsParsable) {
+    if (!parseInt(req.body.maxSeats)) {
         throw new Error("Il valore di maxSeats noon deve contenere caratteri che non siano numeri");
     }
     const eventId = parseInt(req.params.id);
