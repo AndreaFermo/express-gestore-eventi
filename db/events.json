@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "title": "Conferenza TechX",
+        "description": "Una conferenza dedicata alle ultime tecnologie.",
+        "date": "2023-12-01",
+        "maxSeats": 200
+    },
+    {
+        "id": 2,
+        "title": "Corso di Sviluppo Web",
+        "description": "Impara le ultime tecnologie web con esperti del settore.",
+        "date": "2023-11-25",
+        "maxSeats": 30
+    },
+    {
+        "id": 3,
+        "title": "Hackathon CodeFest",
+        "description": "Una competizione di programmazione per sviluppatori appassionati.",
+        "date": "2023-12-10",
+        "maxSeats": 50
+    },
+    {
+        "id": 4,
+        "title": "Presentazione Startup Innovativa",
+        "description": "Scopri le nuove idee delle startup emergenti.",
+        "date": "2023-11-30",
+        "maxSeats": 100
+    },
+    {
+        "id": 5,
+        "title": "Seminaro Blockchain",
+        "description": "Esplora le applicazioni e le sfide della tecnologia blockchain.",
+        "date": "2023-12-05",
+        "maxSeats": 40
+    }
+]
