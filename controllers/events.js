@@ -32,8 +32,8 @@ function store(req, res) {
     }
 
 
-    if (!parseInt(maxSeats)) {
-        throw new Error("Il valore di maxSeats non deve contenere caratteri che non siano numeri");
+    if (!parseInt(maxSeats) || parseInt(maxSeats) < 0) {
+        throw new Error("Il valore di maxSeats non deve contenere caratteri che non siano numeri e non può essere negativo");
     }
 
 
@@ -58,8 +58,8 @@ function update(req, res) {
     }
 
     if (req.body.maxSeats) {
-        if (!parseInt(req.body.maxSeats)) {
-            throw new Error("Il valore di maxSeats non deve contenere caratteri che non siano numeri");
+        if (!parseInt(req.body.maxSeats) || parseInt(req.body.maxSeats) < 0) {
+            throw new Error("Il valore di maxSeats non deve contenere caratteri che non siano numeri e non può essere negativo");
         }
     }
 

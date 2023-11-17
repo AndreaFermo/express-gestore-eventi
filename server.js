@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
+const path = require('path');
 const eventsRouter = require("./routers/events");
 const routeNotFoundMiddleware = require("./middlewares/routeNotFound");
 const errorsFormatterMiddleware = require("./middlewares/errorsFormatter");
@@ -11,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-    res.send("LE MIE API");
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
 app.use("/events", eventsRouter);
