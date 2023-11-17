@@ -16,9 +16,9 @@ function index(req, res) {
 };
 
 function store(req, res) {
-    const { id, title, description, date, maxSeats } = req.body;
+    const { title, description, date, maxSeats } = req.body;
 
-    const newEvent = new Event(id, title, description, date, maxSeats);
+    const newEvent = new Event(title, description, date, maxSeats);
 
     const success = Event.saveEvent(newEvent);
 
