@@ -50,7 +50,7 @@ class Event {
             return true;
 
         } catch (error) {
-            console.log(("Errore durante il salvataggio dell\'evento:", error))
+
             return false;
         }
     }
