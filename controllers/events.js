@@ -1,5 +1,6 @@
 const Event = require('../models/event');
 function index(req, res) {
+
     const { title, description } = req.query;
 
     let events = Event.getAllEvents();
@@ -16,6 +17,9 @@ function index(req, res) {
 };
 
 function store(req, res) {
+
+    checkParams(req)
+
     const { title, description, date, maxSeats } = req.body;
 
 
@@ -37,6 +41,9 @@ function store(req, res) {
 };
 
 function update(req, res) {
+
+    checkParams(req)
+
     if (!parseInt(req.body.maxSeats)) {
         throw new Error("Il valore di maxSeats noon deve contenere caratteri che non siano numeri");
     }
@@ -58,6 +65,18 @@ function show(req, res) {
     res.json(event);
 
 };
+
+function checkParams(req) {
+    const requiredKeys = ['id', 'title', 'description', 'maxSeats'];
+    const paramKeys = Object.keys(req.body);
+
+    const hasExtraKeys = paramKeys.some(key => !requiredKeys.includes(key));
+
+    if (hasExtraKeys) {
+        throw new Error("L'oggetto contiene chiavi aggiuntive non consentite");
+    }
+
+}
 
 module.exports = {
     index,
