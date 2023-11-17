@@ -23,9 +23,9 @@ function store(req, res) {
     const success = Event.saveEvent(newEvent);
 
     if (success) {
-        res.json({ message: 'Evento creato con successo', event: newEvent });
+        res.json({ message: "Evento creato con successo", event: newEvent });
     } else {
-        res.status(500).json({ message: 'Errore durante la creazione dell\'evento' });
+        throw new Error("Errore nella creazione dell'evento");
     }
 
 };
@@ -41,7 +41,7 @@ function show(req, res) {
     const event = Event.getAllEvents().find((e) => e.id === eventId);
 
     if (!event) {
-        return res.status(404).json({ message: 'Evento non trovato' });
+        throw new Error("L'evento non esiste!");
     }
 
     res.json(event);
