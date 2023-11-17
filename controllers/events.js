@@ -1,4 +1,5 @@
-const Event = require('../models/event');
+const Event = require("../models/event");
+const moment = require("moment");
 function index(req, res) {
 
     const { title, description } = req.query;
@@ -18,9 +19,17 @@ function index(req, res) {
 
 function store(req, res) {
 
-    checkParams(req)
+    checkParams(req);
+
+    if (req.body.date) {
+        isValidDate(req.body.date);
+    }
 
     const { title, description, date, maxSeats } = req.body;
+
+    if (!title || !description || !date || !maxSeats) {
+        throw new Error("I campi sono tutti obbligatori");
+    }
 
 
     if (!parseInt(maxSeats)) {
@@ -42,11 +51,18 @@ function store(req, res) {
 
 function update(req, res) {
 
-    checkParams(req)
+    checkParams(req);
 
-    if (!parseInt(req.body.maxSeats)) {
-        throw new Error("Il valore di maxSeats noon deve contenere caratteri che non siano numeri");
+    if (req.body.date) {
+        isValidDate(req.body.date);
     }
+
+    if (req.body.maxSeats) {
+        if (!parseInt(req.body.maxSeats)) {
+            throw new Error("Il valore di maxSeats non deve contenere caratteri che non siano numeri");
+        }
+    }
+
     const eventId = parseInt(req.params.id);
     const updatedEventData = req.body;
     const updatedEvent = Event.updateEvent(eventId, updatedEventData);
@@ -67,7 +83,7 @@ function show(req, res) {
 };
 
 function checkParams(req) {
-    const requiredKeys = ['id', 'title', 'description', 'maxSeats'];
+    const requiredKeys = ["date", "title", "description", "maxSeats"];
     const paramKeys = Object.keys(req.body);
 
     const hasExtraKeys = paramKeys.some(key => !requiredKeys.includes(key));
@@ -75,6 +91,24 @@ function checkParams(req) {
     if (hasExtraKeys) {
         throw new Error("L'oggetto contiene chiavi aggiuntive non consentite");
     }
+
+}
+
+function isValidDate(dateString) {
+
+    const isValidFormat = moment(dateString, 'YYYY-MM-DD', true).isValid();
+
+    if (!isValidFormat) {
+        throw new Error("Formato della data non valido. Utilizzare il formato YYYY-MM-DD.");
+    }
+
+    const currentDate = moment();
+    const inputDate = moment(dateString);
+
+    if (inputDate.isBefore(currentDate, "day")) {
+        throw new Error("La data deve essere superiore o uguale alla data attuale.");
+    }
+
 
 }
 

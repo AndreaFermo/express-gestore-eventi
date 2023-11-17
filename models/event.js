@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 class Event {
+
     constructor(title, description, date, maxSeats) {
         this.id = Event.getNextId();
         this.title = title;
